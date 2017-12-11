@@ -14,7 +14,7 @@ function wrap(obj, function_name, wrapper) {
 
   obj[function_name] = function () {
     return wrapper.call(this, orig, arguments);
-  }
+  };
 }
 
 wrap(MEMRISE.garden.box_mapping.typing.prototype,
