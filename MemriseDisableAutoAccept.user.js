@@ -9,6 +9,19 @@
 // @grant          none
 // ==/UserScript==
 
-const TypingTestBox = MEMRISE.garden.box_mapping.typing;
+function wrap(obj, function_name, wrapper) {
+  const orig = obj[function_name];
 
-console.log(TypiingTestBox);
+  obj[function_name] = function () {
+    return wrapper.call(this, orig, arguments);
+  }
+}
+
+wrap(MEMRISE.garden.box_mapping.typing.prototype,
+  "bind",
+  function (orig, args) {
+    orig.apply(this, args);
+
+    this.$input.onResponseChangedHandler = null;
+  }
+);
