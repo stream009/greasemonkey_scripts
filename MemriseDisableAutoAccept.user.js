@@ -3,7 +3,8 @@
 // @namespace      https://github.com/stream009
 // @description    Disable auto accept feature on Memrise typing test
 // @match          https://www.memrise.com/course/*/garden/*
-// @version        0.0.1
+// @match          https://www.memrise.com/garden/review/*
+// @version        0.0.2
 // @updateURL      https://github.com/stream009/greasemonkey_scripts/raw/master/MemriseDisableAutoAccept.user.js
 // @downloadURL    https://github.com/stream009/greasemonkey_scripts/raw/master/MemriseDisableAutoAccept.user.js
 // @grant          none
