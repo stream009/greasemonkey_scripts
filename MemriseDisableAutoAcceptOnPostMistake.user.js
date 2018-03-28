@@ -4,7 +4,7 @@
 // @description    Disable auto accept feature on post-mistake screen's typing box
 // @match          https://www.memrise.com/course/*/garden/*
 // @match          https://www.memrise.com/garden/review/*
-// @version        1.0.0
+// @version        1.1.0
 // @updateURL      https://github.com/stream009/greasemonkey_scripts/raw/master/MemriseDisableAutoAcceptOnPostMistake.user.js
 // @downloadURL    https://github.com/stream009/greasemonkey_scripts/raw/master/MemriseDisableAutoAcceptOnPostMistake.user.js
 // @grant          none
@@ -18,29 +18,29 @@ function wrap(obj, function_name, wrapper) {
   };
 }
 
-MEMRISE.garden.box_mapping.copytyping.prototype.set_for_complete = function () {
-  this.answeredCorrectly = true;
+_(MEMRISE.garden).on("activate", box => {
+  if (box.template !== "copytyping") return;
 
-  this.$marking_icon.addClass('tick');
-  this.$input.addClass('correct bounce').removeClass('incorrect');
+  box.set_for_complete = function () {
+    this.answeredCorrectly = true;
 
-  this.$next.show();
-};
+    this.$marking_icon.addClass('tick');
+    this.$input.addClass('correct bounce').removeClass('incorrect');
 
-wrap(MEMRISE.garden.box_mapping.copytyping.prototype,
-  "keydown",
-  function (orig, args) {
-    const event = args[0];
-    const code = event.which;
+    this.$next.show();
+  };
 
-    if (code === KEY_CODES.ENTER && this.answeredCorrectly) {
-      const feedback_time = 2000;
-      MEMRISE.garden.feedback.start(feedback_time);
+  wrap(box,
+    "keydown",
+    function (orig, args) {
+      const ev = args[0];
+      const code = ev.which;
 
-      this.maybe_register();
-    }
-    else {
+      if (code === KEY_CODES.ENTER && this.answeredCorrectly) {
+        this.maybe_register();
+      }
+
       orig.apply(this, args);
     }
-  }
-);
+  );
+});
