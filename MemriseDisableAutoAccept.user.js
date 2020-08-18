@@ -4,7 +4,9 @@
 // @description    Disable auto accept feature on Memrise typing test
 // @match          https://www.memrise.com/course/*/garden/*
 // @match          https://www.memrise.com/garden/review/*
-// @version        1.1.0
+// @match          https://app.memrise.com/course/*/garden/*
+// @match          https://app.memrise.com/garden/review/*
+// @version        1.1.1
 // @updateURL      https://github.com/stream009/greasemonkey_scripts/raw/master/MemriseDisableAutoAccept.user.js
 // @downloadURL    https://github.com/stream009/greasemonkey_scripts/raw/master/MemriseDisableAutoAccept.user.js
 // @grant          none
